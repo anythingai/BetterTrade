@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "canisters": {
+    "frontend": {
+      "type": "assets",
+      "source": ["frontend/dist"]
+    },
+    "user_registry": {
+      "type": "motoko",
+      "main": "src/user_registry/main.mo",
+      "dependencies": ["portfolio_state"]
+    },
+    "portfolio_state": {
+      "type": "motoko", 
+      "main": "src/portfolio_state/main.mo"
+    },
+    "strategy_selector": {
+      "type": "motoko",
+      "main": "src/strategy_selector/main.mo",
+      "dependencies": ["portfolio_state", "user_registry"]
+    },
+    "execution_agent": {
+      "type": "motoko",
+      "main": "src/execution_agent/main.mo",
+      "dependencies": ["portfolio_state", "strategy_selector"]
+    },
+    "risk_guard": {
+      "type": "motoko",
+      "main": "src/risk_guard/main.mo",
+      "dependencies": ["portfolio_state", "execution_agent"]
+    },
+    "market_monitor": {
+      "type": "motoko",
+      "main": "src/market_monitor/main.mo"
+    },
+    "sentiment_agent": {
+      "type": "motoko",
+      "main": "src/sentiment_agent/main.mo"
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "providers": ["https://ic0.app"],
+      "type": "persistent"
+    },
+    "testnet": {
+      "providers": ["https://testnet.dfinity.network"],
+      "type": "persistent"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  }
+}

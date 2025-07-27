@@ -1,0 +1,66 @@
+{
+  "deployment_order": [
+    "portfolio_state",
+    "user_registry", 
+    "strategy_selector",
+    "execution_agent",
+    "risk_guard",
+    "frontend"
+  ],
+  "canister_dependencies": {
+    "user_registry": ["portfolio_state"],
+    "strategy_selector": ["portfolio_state", "user_registry"],
+    "execution_agent": ["portfolio_state", "strategy_selector"],
+    "risk_guard": ["portfolio_state", "execution_agent"],
+    "frontend": ["user_registry", "portfolio_state", "strategy_selector", "execution_agent", "risk_guard"]
+  },
+  "state_migration": {
+    "portfolio_state": {
+      "stable_vars": ["users", "portfolios", "transactions", "utxos"],
+      "migration_hooks": ["migrate_portfolio_schema", "update_transaction_format"]
+    },
+    "user_registry": {
+      "stable_vars": ["users", "wallets", "risk_profiles"],
+      "migration_hooks": ["migrate_user_schema", "update_wallet_format"]
+    },
+    "strategy_selector": {
+      "stable_vars": ["strategies", "recommendations", "plans"],
+      "migration_hooks": ["migrate_strategy_templates", "update_scoring_algorithm"]
+    },
+    "execution_agent": {
+      "stable_vars": ["pending_transactions", "signing_keys", "execution_history"],
+      "migration_hooks": ["migrate_transaction_format", "update_signing_protocol"]
+    },
+    "risk_guard": {
+      "stable_vars": ["risk_configs", "monitoring_state", "alert_history"],
+      "migration_hooks": ["migrate_risk_config", "update_monitoring_thresholds"]
+    }
+  },
+  "health_checks": {
+    "portfolio_state": {
+      "endpoint": "health_check",
+      "timeout_ms": 5000,
+      "critical": true
+    },
+    "user_registry": {
+      "endpoint": "health_check", 
+      "timeout_ms": 3000,
+      "critical": true
+    },
+    "strategy_selector": {
+      "endpoint": "health_check",
+      "timeout_ms": 10000,
+      "critical": false
+    },
+    "execution_agent": {
+      "endpoint": "health_check",
+      "timeout_ms": 15000,
+      "critical": true
+    },
+    "risk_guard": {
+      "endpoint": "health_check",
+      "timeout_ms": 5000,
+      "critical": false
+    }
+  }
+}

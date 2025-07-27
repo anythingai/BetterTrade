@@ -1,0 +1,282 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "refresh_interval_seconds": 30,
+    "alert_thresholds": {
+      "response_time_ms": 5000,
+      "error_rate_percent": 5.0,
+      "memory_usage_percent": 80.0,
+      "cycle_balance_minimum": 1000000000000
+    },
+    "health_checks": {
+      "enabled": true,
+      "interval_seconds": 60,
+      "timeout_seconds": 10,
+      "endpoints": [
+        {
+          "canister": "portfolio_state",
+          "function": "health_check",
+          "critical": true
+        },
+        {
+          "canister": "user_registry",
+          "function": "health_check",
+          "critical": true
+        },
+        {
+          "canister": "strategy_selector",
+          "function": "health_check",
+          "critical": false
+        },
+        {
+          "canister": "execution_agent",
+          "function": "health_check",
+          "critical": true
+        },
+        {
+          "canister": "risk_guard",
+          "function": "health_check",
+          "critical": false
+        }
+      ]
+    },
+    "metrics_collection": {
+      "enabled": true,
+      "interval_seconds": 30,
+      "retention_hours": 24,
+      "metrics": [
+        {
+          "name": "user_registrations_total",
+          "type": "counter",
+          "description": "Total number of user registrations"
+        },
+        {
+          "name": "active_users",
+          "type": "gauge",
+          "description": "Number of currently active users"
+        },
+        {
+          "name": "transactions_processed_total",
+          "type": "counter",
+          "description": "Total number of transactions processed"
+        },
+        {
+          "name": "transaction_failures_total",
+          "type": "counter",
+          "description": "Total number of failed transactions"
+        },
+        {
+          "name": "strategy_recommendations_total",
+          "type": "counter",
+          "description": "Total number of strategy recommendations made"
+        },
+        {
+          "name": "strategy_executions_total",
+          "type": "counter",
+          "description": "Total number of strategy executions"
+        },
+        {
+          "name": "bitcoin_confirmations",
+          "type": "histogram",
+          "description": "Distribution of Bitcoin confirmation times"
+        },
+        {
+          "name": "canister_cycles",
+          "type": "gauge",
+          "description": "Current cycle balance for each canister"
+        },
+        {
+          "name": "memory_usage_bytes",
+          "type": "gauge",
+          "description": "Memory usage in bytes for each canister"
+        },
+        {
+          "name": "inter_canister_calls_total",
+          "type": "counter",
+          "description": "Total number of inter-canister calls"
+        },
+        {
+          "name": "api_requests_total",
+          "type": "counter",
+          "description": "Total number of API requests"
+        },
+        {
+          "name": "error_rate",
+          "type": "gauge",
+          "description": "Current error rate percentage"
+        }
+      ]
+    },
+    "logging": {
+      "enabled": true,
+      "level": "INFO",
+      "structured": true,
+      "retention_days": 7,
+      "max_entries_per_canister": 1000,
+      "log_rotation": {
+        "enabled": true,
+        "max_size_mb": 100,
+        "max_files": 5
+      }
+    },
+    "alerting": {
+      "enabled": true,
+      "channels": [
+        {
+          "type": "console",
+          "enabled": true,
+          "min_severity": "WARNING"
+        },
+        {
+          "type": "webhook",
+          "enabled": false,
+          "url": "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+          "min_severity": "ERROR"
+        },
+        {
+          "type": "email",
+          "enabled": false,
+          "smtp_server": "smtp.example.com",
+          "recipients": ["admin@example.com"],
+          "min_severity": "CRITICAL"
+        }
+      ],
+      "rules": [
+        {
+          "name": "High Error Rate",
+          "condition": "error_rate > 5.0",
+          "severity": "WARNING",
+          "description": "Error rate is above 5%"
+        },
+        {
+          "name": "Canister Unhealthy",
+          "condition": "health_status != 'HEALTHY'",
+          "severity": "ERROR",
+          "description": "One or more canisters are unhealthy"
+        },
+        {
+          "name": "Low Cycle Balance",
+          "condition": "canister_cycles < 1000000000000",
+          "severity": "WARNING",
+          "description": "Canister cycle balance is low"
+        },
+        {
+          "name": "High Response Time",
+          "condition": "response_time_ms > 5000",
+          "severity": "WARNING",
+          "description": "Response time is above 5 seconds"
+        },
+        {
+          "name": "Transaction Failures",
+          "condition": "transaction_failure_rate > 10.0",
+          "severity": "ERROR",
+          "description": "Transaction failure rate is above 10%"
+        },
+        {
+          "name": "Memory Usage High",
+          "condition": "memory_usage_percent > 80.0",
+          "severity": "WARNING",
+          "description": "Memory usage is above 80%"
+        }
+      ]
+    },
+    "dashboards": {
+      "enabled": true,
+      "auto_refresh": true,
+      "refresh_interval_seconds": 30,
+      "panels": [
+        {
+          "title": "System Health",
+          "type": "status",
+          "metrics": ["health_status", "uptime_seconds"],
+          "size": "large"
+        },
+        {
+          "title": "User Activity",
+          "type": "chart",
+          "metrics": ["user_registrations_total", "active_users"],
+          "size": "medium"
+        },
+        {
+          "title": "Transaction Volume",
+          "type": "chart",
+          "metrics": ["transactions_processed_total", "transaction_failures_total"],
+          "size": "medium"
+        },
+        {
+          "title": "Performance Metrics",
+          "type": "chart",
+          "metrics": ["response_time_ms", "error_rate"],
+          "size": "medium"
+        },
+        {
+          "title": "Resource Usage",
+          "type": "gauge",
+          "metrics": ["canister_cycles", "memory_usage_bytes"],
+          "size": "small"
+        },
+        {
+          "title": "Recent Logs",
+          "type": "logs",
+          "max_entries": 50,
+          "size": "large"
+        }
+      ]
+    },
+    "performance_profiling": {
+      "enabled": true,
+      "sample_rate": 0.1,
+      "trace_slow_queries": true,
+      "slow_query_threshold_ms": 1000,
+      "profile_memory_usage": true,
+      "profile_cpu_usage": false
+    }
+  },
+  "environments": {
+    "local": {
+      "monitoring": {
+        "logging": {
+          "level": "DEBUG",
+          "enabled": true
+        },
+        "alerting": {
+          "enabled": false
+        },
+        "performance_profiling": {
+          "enabled": true,
+          "sample_rate": 1.0
+        }
+      }
+    },
+    "testnet": {
+      "monitoring": {
+        "logging": {
+          "level": "INFO",
+          "enabled": true
+        },
+        "alerting": {
+          "enabled": true
+        },
+        "performance_profiling": {
+          "enabled": true,
+          "sample_rate": 0.1
+        }
+      }
+    },
+    "mainnet": {
+      "monitoring": {
+        "logging": {
+          "level": "WARN",
+          "enabled": true
+        },
+        "alerting": {
+          "enabled": true
+        },
+        "performance_profiling": {
+          "enabled": false,
+          "sample_rate": 0.01
+        }
+      }
+    }
+  }
+}

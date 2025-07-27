@@ -1,0 +1,496 @@
+/* Risk Profile Selection Styles */
+
+.risk-profile-selection {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section-header h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: #6B7280;
+  font-size: 16px;
+}
+
+/* Risk Slider Container */
+.risk-slider-container {
+  margin-bottom: 32px;
+}
+
+.risk-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.risk-option {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.risk-option:hover {
+  border-color: var(--risk-color, #6B7280);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.risk-option.selected {
+  border-color: var(--risk-color, #6B7280);
+  background: color-mix(in srgb, var(--risk-color, #6B7280) 5%, white);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--risk-color, #6B7280) 20%, transparent);
+}
+
+.risk-icon {
+  font-size: 32px;
+  margin-right: 16px;
+  min-width: 48px;
+  text-align: center;
+}
+
+.risk-content {
+  flex: 1;
+}
+
+.risk-content h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 4px;
+}
+
+.risk-content p {
+  color: #6B7280;
+  font-size: 14px;
+}
+
+.risk-selector {
+  margin-left: 16px;
+}
+
+.radio-button {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #D1D5DB;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.risk-option.selected .radio-button {
+  border-color: var(--risk-color, #6B7280);
+}
+
+.risk-option.selected .radio-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--risk-color, #6B7280);
+  border-radius: 50%;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 32px;
+  color: #6B7280;
+}
+
+.loading-state p {
+  font-size: 16px;
+}
+
+/* Strategy Recommendation */
+.strategy-recommendation {
+  margin-top: 32px;
+}
+
+.recommendation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.recommendation-header h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.strategy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--badge-color, #6B7280) 10%, white);
+  color: var(--badge-color, #6B7280);
+  border: 1px solid var(--badge-color, #6B7280);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Strategy Card */
+.strategy-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.strategy-overview h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 16px;
+}
+
+.strategy-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: #F9FAFB;
+  border-radius: 8px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #6B7280;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.metric-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+/* Strategy Details */
+.strategy-details {
+  margin-bottom: 24px;
+}
+
+.allocation-breakdown,
+.strategy-rationale {
+  margin-bottom: 20px;
+}
+
+.allocation-breakdown h6,
+.strategy-rationale h6 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.allocation-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.allocation-item:last-child {
+  border-bottom: none;
+}
+
+.venue-name {
+  font-weight: 500;
+  color: #1F2937;
+}
+
+.allocation-amount {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.strategy-rationale p {
+  color: #4B5563;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Strategy Actions */
+.strategy-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.approve-btn {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 24px;
+  background: #10B981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.approve-btn:disabled {
+  background: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.back-btn {
+  padding: 12px 24px;
+  background: white;
+  color: #6B7280;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+}
+
+/* Approval Dialog */
+.approval-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.approval-dialog {
+  background: white;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.dialog-header {
+  padding: 24px 24px 0;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.dialog-header h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 16px;
+}
+
+.dialog-content {
+  padding: 24px;
+}
+
+.dialog-content > p {
+  color: #4B5563;
+  margin-bottom: 20px;
+}
+
+.strategy-summary {
+  background: #F9FAFB;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.strategy-summary h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 12px;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-details > div {
+  color: #4B5563;
+  font-size: 14px;
+}
+
+.summary-details strong {
+  color: #1F2937;
+}
+
+.risk-warning {
+  background: #FEF3C7;
+  border: 1px solid #F59E0B;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.risk-warning p {
+  color: #92400E;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.risk-warning ul {
+  color: #92400E;
+  font-size: 14px;
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.risk-warning li {
+  margin-bottom: 4px;
+}
+
+.dialog-actions {
+  padding: 0 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.confirm-btn {
+  padding: 10px 20px;
+  background: #10B981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.confirm-btn:disabled {
+  background: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  padding: 10px 20px;
+  background: white;
+  color: #6B7280;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+}
+
+.cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  background: #FEE2E2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .risk-profile-selection {
+    padding: 16px;
+  }
+  
+  .strategy-metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .strategy-actions {
+    flex-direction: column;
+  }
+  
+  .approve-btn,
+  .back-btn {
+    min-width: auto;
+  }
+  
+  .recommendation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .approval-dialog {
+    margin: 20px;
+    max-width: none;
+  }
+  
+  .dialog-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .confirm-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}

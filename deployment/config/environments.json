@@ -1,0 +1,53 @@
+{
+  "local": {
+    "network": "local",
+    "replica_url": "http://127.0.0.1:4943",
+    "bitcoin_network": "regtest",
+    "features": {
+      "debug_logging": true,
+      "mock_external_apis": true,
+      "test_data_generation": true,
+      "performance_monitoring": false
+    },
+    "canister_settings": {
+      "compute_allocation": 0,
+      "memory_allocation": 0,
+      "freezing_threshold": 2592000
+    },
+    "upgrade_mode": "reinstall"
+  },
+  "testnet": {
+    "network": "testnet",
+    "replica_url": "https://testnet.dfinity.network",
+    "bitcoin_network": "testnet",
+    "features": {
+      "debug_logging": true,
+      "mock_external_apis": false,
+      "test_data_generation": false,
+      "performance_monitoring": true
+    },
+    "canister_settings": {
+      "compute_allocation": 1,
+      "memory_allocation": 1073741824,
+      "freezing_threshold": 7776000
+    },
+    "upgrade_mode": "upgrade"
+  },
+  "mainnet": {
+    "network": "ic",
+    "replica_url": "https://ic0.app",
+    "bitcoin_network": "bitcoin",
+    "features": {
+      "debug_logging": false,
+      "mock_external_apis": false,
+      "test_data_generation": false,
+      "performance_monitoring": true
+    },
+    "canister_settings": {
+      "compute_allocation": 5,
+      "memory_allocation": 2147483648,
+      "freezing_threshold": 15552000
+    },
+    "upgrade_mode": "upgrade"
+  }
+}
